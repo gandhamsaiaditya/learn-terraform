@@ -5,3 +5,7 @@
 output "rg" {
   value = data.azurerm_resource_group.example
 }
+provider "azurerm{
+
+features{}
+}"
