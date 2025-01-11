@@ -1,5 +1,5 @@
  data "azurerm_resource_group" "example" {
-  name = "project-setup"
+  name = "Project-Setup"
 }
 
 output "rg" {
