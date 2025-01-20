@@ -1,16 +1,8 @@
- data "azurerm_resource_group" "example" {
-  name = "Project-Setup"
-}
-data "azurerm_subnet" "example" {
-  name                 = "VN"
-  virtual_network_name = "production"
-  resource_group_name  = "data.azurerm_resource_group.example.name"
-}
 
 
 resource "azurerm_network_interface" "example" {
   name                = "test-nic"
-  location            = data.azurerm_resource_group.example.location    
+  location            = data.azurerm_resource_group.example.location
   resource_group_name = data.azurerm_resource_group.example.name
 
   ip_configuration {
@@ -21,6 +13,7 @@ resource "azurerm_network_interface" "example" {
 }
 
 
+
 resource "azurerm_virtual_machine" "main" {
   name                  = "test-vm"
   location              = data.azurerm_resource_group.example.location
@@ -29,7 +22,7 @@ resource "azurerm_virtual_machine" "main" {
   vm_size               = "Standard B2s"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
-  # delete_os_disk_on_termination = true
+  delete_os_disk_on_termination = true
 
   # Uncomment this line to delete the data disks automatically when deleting the VM
   # delete_data_disks_on_termination = true
@@ -48,8 +41,8 @@ resource "azurerm_virtual_machine" "main" {
   }
   os_profile {
     computer_name  = "hostname"
-    admin_username = "testadmin"
-    admin_password = "Password1234!"
+    admin_username = "aditya"
+    admin_password = "aditya@123456"
   }
   os_profile_linux_config {
     disable_password_authentication = false

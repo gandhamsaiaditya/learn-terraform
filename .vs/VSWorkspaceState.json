@@ -3,8 +3,10 @@
     "",
     "\\01-sample",
     "\\02-data-source",
-    "\\03-Resource"
+    "\\03-Resource",
+    "\\04-Variable",
+    "\\Roboshop-v1"
   ],
-  "SelectedNode": "\\03-Resource",
+  "SelectedNode": "\\02-data-source\\main.tf",
   "PreviewInSolutionExplorer": false
 }
