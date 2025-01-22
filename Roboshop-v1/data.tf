@@ -1,7 +1,6 @@
 data "azurerm_resource_group" "rg" {
   name     = "Vintech"
-  location = "UK West"
-}
+ }
 
 data "azurerm_subnet" "internal" {
   name                 = "internal"
