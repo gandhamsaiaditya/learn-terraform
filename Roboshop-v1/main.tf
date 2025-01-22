@@ -1,5 +1,4 @@
-module "components"
-{
+module "components" {
   for_each  = var.components
   source    = "./vm"
   component = each.value["name"]
