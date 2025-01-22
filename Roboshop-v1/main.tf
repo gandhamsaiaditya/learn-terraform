@@ -1,51 +1,78 @@
-
-
-
-resource "azurerm_network_interface" "ni" {
-  name                = "Vintech-nic"
-  location            = data.azurerm_resource_group.rg.location
-  resource_group_name = data.azurerm_resource_group.rg.name
-
-  ip_configuration {
-    name                          = "testconfiguration1"
-    subnet_id                     =data.azurerm_subnet.internal.id
-    private_ip_address_allocation = "Dynamic"
-  }
+module "components"
+{
+  for_each = var.components
+  source = "./vm"
+  component = each.value["name"]
+  vm_size   = each.value["vm_size"]
 }
 
-resource "azurerm_virtual_machine" "main" {
-  name                  = "Frontend-vm"
-  location              = data.azurerm_resource_group.rg.location
-  resource_group_name   = data.azurerm_resource_group.rg.name
-  network_interface_ids = [azurerm_network_interface.ni.id]
-  vm_size               = "Standard_DS1_v2"
+variable "components"{
+  default = {
+    frontend = {
 
-  # Uncomment this line to delete the OS disk automatically when deleting the VM
-  delete_os_disk_on_termination = true
 
-  # Uncomment this line to delete the data disks automatically when deleting the VM
-  # delete_data_disks_on_termination = true
+      name    = "frontend-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    mongodb = {
 
-  storage_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
-    version   = "latest"
+
+      name    = "mondodb-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    catalogue = {
+
+
+      name    = "catalogue-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    redis = {
+
+
+      name    = "redis-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    user = {
+
+
+      name    = "user-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    cart = {
+
+
+      name    = "cart-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    mysql = {
+
+
+      name    = "mysql-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    shipping = {
+
+
+      name    = "shipping-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    rabbitmq = {
+
+
+      name    = "rabbitmq-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    payment = {
+
+
+      name    = "payment-dev"
+      vm_size = "Standard_DS1_v2"
+    }
+    dispatch = {
+
+
+      name    = "dispatch-dev"
+      vm_size = "Standard_DS1_v2"
+    }
   }
-  storage_os_disk {
-    name              = "myosdisk1"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-  os_profile {
-    computer_name  = "hostname"
-    admin_username = "testadmin"
-    admin_password = "Password1234!"
-  }
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
- }
-
-
+}
