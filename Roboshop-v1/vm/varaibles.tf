@@ -1,8 +1,6 @@
 variable "component"{
-
 }
 
-variable "vm_size"
-{
+variable "vm_size" {
 
 }
