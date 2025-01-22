@@ -5,6 +5,7 @@ module "components" {
   vm_size   = each.value["vm_size"]
 }
 
+
 variable "components"{
   default = {
     frontend = {
