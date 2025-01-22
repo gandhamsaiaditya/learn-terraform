@@ -3,8 +3,8 @@ data "azurerm_resource_group" "rg" {
  }
 
 data "azurerm_subnet" "internal" {
-  name                 = "internal"
+  name                 = "default"
   resource_group_name  = data.azurerm_resource_group.rg.name
-  virtual_network_name = "Vintech-network"
+  virtual_network_name = "Workshop-vnet"
 
 }
