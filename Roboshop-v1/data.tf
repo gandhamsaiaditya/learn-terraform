@@ -1,5 +1,5 @@
 data "azurerm_resource_group" "rg" {
-  name     = "Vintech"
+  name     = "project-setup-1"
  }
 
 data "azurerm_subnet" "internal" {
