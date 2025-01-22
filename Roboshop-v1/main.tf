@@ -23,7 +23,7 @@ variable "components"{
 
 
       name    = "catalogue-dev"
-      vm_size =  "Standard_DS1_v2"
+      vm_size =  "Standard_D2S_v3"
     }
     redis = {
 
