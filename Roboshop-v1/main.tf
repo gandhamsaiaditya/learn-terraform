@@ -8,32 +8,22 @@ module "components" {
 variable "components"{
   default = {
     frontend = {
-
-
       name    = "frontend-dev"
       vm_size = "Standard_DS1_v2"
     }
     mongodb = {
-
-
       name    = "mondodb-dev"
       vm_size = "Standard_DS1_v2"
     }
     catalogue = {
-
-
       name    = "catalogue-dev"
-      vm_size =  "Standard_D2S_v3"
+      vm_size =  "Standard_DS1_v2"
     }
     redis = {
-
-
       name    = "redis-dev"
       vm_size = "Standard_DS1_v2"
     }
     user = {
-
-
       name    = "user-dev"
       vm_size = "Standard_DS1_v2"
     }
