@@ -47,10 +47,19 @@ resource "azurerm_public_ip" "main" {
     component = "${var.component}"
   }
 }
-resource "azurerm_network_interface_application_security_group_association" "main" {
+resource "azurerm_network_interface_security_group_association" "main" {
   network_interface_id          = azurerm_network_interface.main.id
-  application_security_group_id = azurerm_network_security_group.main.id
+  network_security_group_id     = azurerm_network_security_group.main.id
 }
+
+resource "azurerm_dns_a_record" "main" {
+  name                = "${var.component}-dev-devopsazurepractice.store"
+  zone_name           = "devopsazurepractice.store"
+  resource_group_name   = data.azurerm_resource_group.main.name
+  ttl                 = 300
+  records             = [azurerm_network_interface.main.private_ip_address]
+}
+
 
 resource "azurerm_virtual_machine" "main" {
   name                  = var.component
@@ -82,14 +91,26 @@ resource "azurerm_virtual_machine" "main" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
+  provisioner "remote-exec" {
+
+    connection {
+      type     = "ssh"
+      user     = "aditya"
+      password = "aditya@123456"
+      host     = azurerm_public_ip.main.ip_address
+    }
+    inline = [
+
+      "sudo dnf install python3.12-pip -y",
+      "sudo pip3.12 install ansible",
+      "ansible-pull -i localhost, -u https://github.com/gandhamsaiaditya/Roboshop-shell -e app.name=${var.component} -e env = dev"
+
+    ]
+  }
 }
 
 
-resource "azurerm_dns_a_record" "main" {
-  name                = "${var.component}-dev-devopsazurepractice.store"
-  zone_name           = "devopsazurepractice.store"
-  resource_group_name   = data.azurerm_resource_group.main.name
-  ttl                 = 300
-  records             = [azurerm_network_interface.main.private_ip_address]
-}
+
+
+
 
