@@ -91,22 +91,22 @@ resource "azurerm_virtual_machine" "main" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-  provisioner "remote-exec" {
+ # provisioner "remote-exec" {
 
-    connection {
-      type     = "ssh"
-      user     = "aditya"
-      password = "aditya@123456"
-      host     = azurerm_public_ip.main.ip_address
-    }
-    inline = [
+  #  connection {
+   #   type     = "ssh"
+  #    user     = "aditya"
+   #   password = "aditya@123456"
+  #    host     = azurerm_public_ip.main.ip_address
+  #  }
+  #  inline = [
 
-      "sudo dnf install python3.12-pip -y",
-      "sudo pip3.12 install ansible",
-      "ansible-pull -i localhost, -u https://github.com/gandhamsaiaditya/Roboshop-shell -e app.name=${var.component} -e env = dev"
+   #   "sudo dnf install python3.12-pip -y",
+   #   "sudo pip3.12 install ansible",
+   #   "ansible-pull -i localhost, -u https://github.com/gandhamsaiaditya/Roboshop-shell -e app.name=${var.component} -e env = dev"
 
-    ]
-  }
+  #  ]
+ # }
 }
 
 
