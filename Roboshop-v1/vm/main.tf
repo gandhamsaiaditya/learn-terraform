@@ -49,7 +49,7 @@ resource "azurerm_public_ip" "main" {
 }
 resource "azurerm_network_interface_application_security_group_association" "main" {
   network_interface_id          = azurerm_network_interface.main.id
-  application_security_group_id = azurerm_application_security_group.main.id
+  application_security_group_id = azurerm_network_security_group.main.id
 }
 
 resource "azurerm_virtual_machine" "main" {
