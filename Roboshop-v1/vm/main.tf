@@ -53,7 +53,7 @@ resource "azurerm_network_interface_security_group_association" "main" {
 }
 
 resource "azurerm_dns_a_record" "main" {
-  name                = "${var.component}-dev-devopsazurepractice.store"
+  name                = "${var.component}-dev"
   zone_name           = "devopsazurepractice.store"
   resource_group_name   = data.azurerm_resource_group.main.name
   ttl                 = 10
