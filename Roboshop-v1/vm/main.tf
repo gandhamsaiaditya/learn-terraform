@@ -105,7 +105,7 @@ resource "null_resource" "ansible" {
 
         "sudo dnf install python3.12-pip -y",
         "sudo pip3.12 install ansible",
-        "ansible-pull -i localhost, -u https://github.com/gandhamsaiaditya/Roboshop-shell -e app.name=${var.component} -e env = dev"
+        "ansible-pull -i localhost, -u https://github.com/gandhamsaiaditya/Roboshop-shell -e app_name=${var.component} -e env = dev"
 
       ]
     }
